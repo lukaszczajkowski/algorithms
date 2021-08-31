@@ -19,6 +19,22 @@ public class Recursion {
         return elementsCountHelper(list, list.size() - 1);
     }
 
+    public static int findMax(List<Integer> list) {
+        if (list.isEmpty()) {
+            return Integer.MIN_VALUE;
+        }
+
+        return findMaxHelper(list, list.size() - 1);
+    }
+
+    private static int findMaxHelper(List<Integer> list, int currentIdx) {
+        if (currentIdx == 0) {
+            return list.get(currentIdx);
+        }
+
+        return Math.max(list.get(currentIdx), findMaxHelper(list, currentIdx - 1));
+    }
+
     private static int elementsCountHelper(List<Integer> list, int currentIdx) {
         if (currentIdx == 0) {
             return 1;
