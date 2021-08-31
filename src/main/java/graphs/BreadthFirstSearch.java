@@ -1,15 +1,13 @@
 package graphs;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BreadthFirstSearch {
 
     static class Node {
 
         private String name;
+        //todo: change it to a hashmap
         private List<Node> children;
 
         public Node (String name) {
@@ -18,13 +16,19 @@ public class BreadthFirstSearch {
         }
 
         public List<String> breadthFirstSearch(List<String> list) {
+            Map<String, Boolean> searched = new HashMap<>();
             Queue<Node> queue = new LinkedList<>();
             queue.add(this);
 
             while (!queue.isEmpty()) {
                 Node current = queue.poll();
                 list.add(current.name);
-                queue.addAll(current.children);
+                current.children.forEach(child -> {
+                    if (!searched.containsKey(child.name)) {
+                        searched.put(child.name, true);
+                        queue.add(child);
+                    }
+                });
             }
 
             return list;
