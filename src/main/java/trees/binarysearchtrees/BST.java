@@ -157,4 +157,16 @@ public class BST<Key extends Comparable<Key>, Value> {
         current.size = 1 + size(current.left) + size(current.right);
         return current;
     }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node current) {
+        if (current == null) {
+            return 0;
+        }
+
+        return 1 + Math.max(height(current.left), height(current.right));
+    }
 }
